@@ -12,24 +12,60 @@ export default function DocList() {
     queryFn: () => api.getDocs(),
   });
 
-  if (!docs) return;
+  if (!docs) return <Text>No documents found</Text>;
   return (
     <View className="p-3">
       {docs.map((doc) => {
         return (
-          <Card key={doc.ID}>
+          <Card
+            key={doc.ID}
+            className="mb-5 gap-4 rounded-sm"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.1,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}>
             <CardHeader className="flex flex-row items-center">
-              <CardTitle>{doc.Title}</CardTitle>
-              <CardDescription>Version {doc.Version}</CardDescription>
+              <CardTitle className="max-w-[60%] truncate" numberOfLines={1}>
+                {doc.Title}
+              </CardTitle>
+              <CardDescription className="text-xs">Version {doc.Version}</CardDescription>
             </CardHeader>
-            <CardContent className="sp flex flex-row gap-20">
-              <View className="flex flex-row items-center gap-2">
-                <Icon as={UsersRound} />
-                <Text className="text-sm font-semibold">Contributors</Text>
+            <CardContent className="flex flex-row gap-10">
+              <View>
+                <View className="mb-2 flex flex-row items-center gap-2">
+                  <Icon as={UsersRound} className="color-zinc-800" />
+                  <Text className="text-sm font-semibold">Contributors</Text>
+                </View>
+                <View className="flex gap-2">
+                  {doc.Contributors.map((item) => {
+                    return (
+                      <Text key={item.ID} className="text-sm text-zinc-600">
+                        {item.Name}
+                      </Text>
+                    );
+                  })}
+                </View>
               </View>
-              <View className="flex flex-row items-center gap-2">
-                <Icon as={Link} />
-                <Text className="text-sm font-semibold">Attachments</Text>
+              <View>
+                <View className="mb-2 flex flex-row items-center gap-2">
+                  <Icon as={Link} className="color-zinc-800" />
+                  <Text className="text-sm font-semibold">Attachments</Text>
+                </View>
+                <View className="flex gap-2">
+                  {doc.Attachments.map((item, index) => {
+                    return (
+                      <Text key={index + item} className="text-sm text-zinc-600">
+                        {item}
+                      </Text>
+                    );
+                  })}
+                </View>
               </View>
             </CardContent>
           </Card>

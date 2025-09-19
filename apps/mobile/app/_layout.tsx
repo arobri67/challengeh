@@ -18,8 +18,25 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack />
-      <PortalHost />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* <Stack.Screen
+          name="create-document"
+          options={{
+            presentation: 'modal',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="document/[id]"
+          options={{
+            headerShown: false,
+          }}
+        /> */}
+      </Stack>
     </QueryClientProvider>
   );
 }
