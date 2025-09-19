@@ -15,17 +15,19 @@ const LOGO = {
 
 const SCREEN_OPTIONS = {
   light: {
-    title: 'React Native Reusables',
+    title: '',
     headerTransparent: true,
     headerShadowVisible: true,
-    headerStyle: { backgroundColor: THEME.light.background },
+    headerStyle: { backgroundColor: THEME.light.background, height: 100 },
+    headerLeft: () => <Text className="text-2xl font-bold">Documents</Text>,
     headerRight: () => <ThemeToggle />,
   },
   dark: {
-    title: 'React Native Reusables',
+    title: '',
     headerTransparent: true,
     headerShadowVisible: true,
-    headerStyle: { backgroundColor: THEME.dark.background },
+    headerStyle: { backgroundColor: THEME.dark.background, height: 100 },
+    headerLeft: () => <Text className="text-2xl font-bold">Documents</Text>,
     headerRight: () => <ThemeToggle />,
   },
 };
