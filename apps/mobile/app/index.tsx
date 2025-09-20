@@ -1,15 +1,5 @@
-import DocList from '@/components/doc-list';
-import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Redirect } from 'expo-router';
 
-export default function Screen() {
-  return (
-    <>
-      <SafeAreaView className="bg-white">
-        <View className="bg-white">
-          <DocList />
-        </View>
-      </SafeAreaView>
-    </>
-  );
+export default function Index() {
+  return <Redirect href="/documents" />;
 }
