@@ -23,8 +23,6 @@ export default function Documents() {
     data: docs,
     isLoading,
     refetch,
-    isError,
-    error,
   } = useQuery({
     queryKey: ['docs'],
     queryFn: () => api.getDocs(),
@@ -38,7 +36,7 @@ export default function Documents() {
     setRefreshing(false);
   };
 
-  if (!docs) return <Text>No documents found</Text>;
+  if (!docs) return <Text>⚠️ No documents found</Text>;
 
   const sortedDocs = [...docs].sort((a, b) => {
     switch (sortBy) {
@@ -58,11 +56,7 @@ export default function Documents() {
       <SafeAreaProvider>
         <SafeAreaView className="flex-1 bg-white">
           <View className="flex-1 bg-slate-50">
-            <DocumentHeader
-              unreadCount={unreadCount}
-              notifications={notifications}
-              onMarkAsRead={markAsRead}
-            />
+            <DocumentHeader unreadCount={unreadCount} />
             <DocumentsControls
               sortBy={sortBy}
               onSortChange={setSortBy}
