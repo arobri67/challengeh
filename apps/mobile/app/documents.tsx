@@ -4,18 +4,21 @@ import DocumentHeader from '@/components/documents/documents-header';
 import { Text } from '@/components/ui/text';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { FlatList, RefreshControl, View } from 'react-native';
+import { Alert, FlatList, Modal, RefreshControl, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import DocumentCardList from '@/components/documents/document-card-list';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
 import { useWebSocket } from '@/hooks/use-websocket';
 import { WS_URL } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import DrawerModal from '@/components/drawer';
 
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
 
 export default function Documents() {
-  const { notifications, unreadCount, markAsRead } = useWebSocket(WS_URL);
+  const { unreadCount } = useWebSocket(WS_URL);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
 
@@ -80,6 +83,10 @@ export default function Documents() {
                 viewMode === 'grid' ? { justifyContent: 'space-between' } : undefined
               }
             />
+          </View>
+
+          <View className="border-t-hairline border-slate-400 p-4">
+            <DrawerModal />
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
