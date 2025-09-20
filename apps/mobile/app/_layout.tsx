@@ -14,22 +14,7 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerShown: false,
-        }}>
-        <Stack.Screen name="documents" options={{ headerShown: false }} />
-        {/* <Stack.Screen
-          name="create-document"
-          options={{
-            presentation: 'modal',
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="document/[id]"
-          options={{
-            headerShown: false,
-          }}
-        /> */}
-      </Stack>
+        }}></Stack>
     </QueryClientProvider>
   );
 }

@@ -1,6 +1,5 @@
+import { BASE_URL } from '@/lib/utils';
 import { DocsRes } from '@/types/types';
-
-const BASE_URL = 'http://localhost:8080';
 
 const api = {
   async getDocs(): Promise<DocsRes | undefined> {

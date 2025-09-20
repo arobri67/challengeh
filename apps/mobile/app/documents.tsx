@@ -12,7 +12,7 @@ import DocumentCardGrid from '@/components/documents/document-card-grid';
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
 
-export default function DocumentsScreen() {
+export default function Documents() {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
 
@@ -20,6 +20,8 @@ export default function DocumentsScreen() {
     data: docs,
     isLoading,
     refetch,
+    isError,
+    error,
   } = useQuery({
     queryKey: ['docs'],
     queryFn: () => api.getDocs(),
@@ -52,7 +54,7 @@ export default function DocumentsScreen() {
     <>
       <SafeAreaProvider>
         <SafeAreaView className="flex-1 bg-white">
-          <View className="flex-1 bg-white">
+          <View className="flex-1 bg-slate-50">
             <DocumentHeader />
             <DocumentsControls
               sortBy={sortBy}
@@ -61,14 +63,21 @@ export default function DocumentsScreen() {
               onViewModeChange={setViewMode}
             />
             <FlatList
-              className="px-4"
+              className="gap-4 px-4"
               data={sortedDocs}
               renderItem={({ item }) =>
-                viewMode === 'list' ? <DocumentCardList document={item} /> : <DocumentCardGrid />
+                viewMode === 'list' ? (
+                  <DocumentCardList document={item} />
+                ) : (
+                  <DocumentCardGrid document={item} />
+                )
               }
               numColumns={viewMode === 'grid' ? 2 : 1}
               key={viewMode}
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+              columnWrapperStyle={
+                viewMode === 'grid' ? { justifyContent: 'space-between' } : undefined
+              }
             />
           </View>
         </SafeAreaView>

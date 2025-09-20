@@ -1,6 +1,12 @@
-import { Pressable, View } from 'react-native';
-import { Text } from '../ui/text';
-import { ChevronDown, ChevronsUpDown, Grid3X3, List } from 'lucide-react-native';
+import {
+  Bold,
+  ChevronDown,
+  ChevronsUpDown,
+  Grid3X3,
+  Italic,
+  List,
+  Underline,
+} from 'lucide-react-native';
 import {
   Select,
   SelectContent,
@@ -11,6 +17,9 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Icon } from '../ui/icon';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '../ui/toggle-group';
+import { View } from 'react-native';
+import { useState } from 'react';
 
 interface DocumentsHeaderProps {
   sortBy: 'recent' | 'name' | 'version';
@@ -39,10 +48,14 @@ export default function DocumentsControls({
     }
   };
 
-  return (
-    <View className="flex-row items-center justify-between px-4 pb-4">
-      {/* Sort by dropdown */}
+  const handleViewModeChange = (newMode: string | undefined) => {
+    if (newMode === 'list' || newMode === 'grid') {
+      onViewModeChange(newMode);
+    }
+  };
 
+  return (
+    <View className="flex-row items-center justify-between px-4 pb-4 pt-6">
       <Select value={selectedOption} onValueChange={handleValueChange}>
         <SelectTrigger>
           <Icon as={ChevronsUpDown} />
@@ -57,6 +70,19 @@ export default function DocumentsControls({
           </SelectGroup>
         </SelectContent>
       </Select>
+
+      <ToggleGroup
+        value={viewMode}
+        onValueChange={handleViewModeChange}
+        variant="outline"
+        type="single">
+        <ToggleGroupItem isFirst value="list" aria-label="List view">
+          <ToggleGroupIcon as={List} />
+        </ToggleGroupItem>
+        <ToggleGroupItem isLast value="grid" aria-label="Grid view">
+          <ToggleGroupIcon as={Grid3X3} />
+        </ToggleGroupItem>
+      </ToggleGroup>
 
       {/* View toggle */}
       {/* <View className="flex-row rounded-lg bg-gray-100 p-1">
