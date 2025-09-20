@@ -3,7 +3,7 @@ interface Contributor {
   Name: string;
 }
 
-interface DocItems {
+export interface DocItems {
   ID: string;
   CreatedAt: string; // Represents an ISO 8601 date string
   UpdatedAt: string; // Represents an ISO 8601 date string
@@ -14,3 +14,11 @@ interface DocItems {
 }
 
 export type DocsRes = DocItems[];
+
+export type NotificationMessage = {
+  Timestamp: string;
+  UserID: string;
+  UserName: string;
+  DocumentID: string;
+  DocumentTitle: string;
+};

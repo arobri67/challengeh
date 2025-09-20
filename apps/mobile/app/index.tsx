@@ -1,12 +1,5 @@
-import DocList from '@/components/doc-list';
-import { View } from 'react-native';
+import { Redirect } from 'expo-router';
 
-export default function Screen() {
-  return (
-    <>
-      <View>
-        <DocList />
-      </View>
-    </>
-  );
+export default function Index() {
+  return <Redirect href="/documents" />;
 }
