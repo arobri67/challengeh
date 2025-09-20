@@ -1,12 +1,4 @@
-import {
-  Bold,
-  ChevronDown,
-  ChevronsUpDown,
-  Grid3X3,
-  Italic,
-  List,
-  Underline,
-} from 'lucide-react-native';
+import { ChevronsUpDown, Grid3X3, List } from 'lucide-react-native';
 import {
   Select,
   SelectContent,
@@ -19,7 +11,6 @@ import {
 import { Icon } from '../ui/icon';
 import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '../ui/toggle-group';
 import { View } from 'react-native';
-import { useState } from 'react';
 
 interface DocumentsHeaderProps {
   sortBy: 'recent' | 'name' | 'version';
@@ -76,11 +67,25 @@ export default function DocumentsControls({
         onValueChange={handleViewModeChange}
         variant="outline"
         type="single">
-        <ToggleGroupItem isFirst value="list" aria-label="List view">
-          <ToggleGroupIcon as={List} />
+        <ToggleGroupItem
+          isFirst
+          value="list"
+          aria-label="List view"
+          className={viewMode === 'list' ? 'bg-white' : 'bg-gray-100'}>
+          <ToggleGroupIcon
+            as={List}
+            className={viewMode === 'list' ? 'text-blue-500' : 'text-gray-600'}
+          />
         </ToggleGroupItem>
-        <ToggleGroupItem isLast value="grid" aria-label="Grid view">
-          <ToggleGroupIcon as={Grid3X3} />
+        <ToggleGroupItem
+          isLast
+          value="grid"
+          aria-label="Grid view"
+          className={viewMode === 'grid' ? 'bg-white' : 'bg-gray-100'}>
+          <ToggleGroupIcon
+            as={Grid3X3}
+            className={viewMode === 'grid' ? 'text-blue-500' : 'text-gray-600'}
+          />
         </ToggleGroupItem>
       </ToggleGroup>
     </View>
