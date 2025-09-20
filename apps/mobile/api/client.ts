@@ -1,5 +1,5 @@
 import { BASE_URL } from '@/lib/utils';
-import { DocsRes } from '@/types/types';
+import { DocsRes } from '@/types';
 
 const api = {
   async getDocs(): Promise<DocsRes | undefined> {

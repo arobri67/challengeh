@@ -8,11 +8,14 @@ import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import DocumentCardList from '@/components/documents/document-card-list';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
+import { useWebSocket } from '@/hooks/use-websocket';
+import { WS_URL } from '@/lib/utils';
 
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
 
 export default function Documents() {
+  const { notifications, unreadCount, markAsRead } = useWebSocket(WS_URL);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
 
@@ -55,7 +58,11 @@ export default function Documents() {
       <SafeAreaProvider>
         <SafeAreaView className="flex-1 bg-white">
           <View className="flex-1 bg-slate-50">
-            <DocumentHeader />
+            <DocumentHeader
+              unreadCount={unreadCount}
+              notifications={notifications}
+              onMarkAsRead={markAsRead}
+            />
             <DocumentsControls
               sortBy={sortBy}
               onSortChange={setSortBy}

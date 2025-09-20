@@ -14,3 +14,11 @@ export interface DocItems {
 }
 
 export type DocsRes = DocItems[];
+
+export type NotificationMessage = {
+  Timestamp: string;
+  UserID: string;
+  UserName: string;
+  DocumentID: string;
+  DocumentTitle: string;
+};

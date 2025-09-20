@@ -1,7 +1,7 @@
 import { View } from 'lucide-react-native';
 import { Text } from '../ui/text';
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { DocItems } from '@/types/types';
+import { DocItems } from '@/types';
 
 interface DocumentCardGridProps {
   document: DocItems;

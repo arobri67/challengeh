@@ -56,7 +56,7 @@ export default function DocumentsControls({
 
   return (
     <View className="flex-row items-center justify-between px-4 pb-4 pt-6">
-      <Select value={selectedOption} onValueChange={handleValueChange}>
+      <Select value={selectedOption} onValueChange={handleValueChange} key={`select-${sortBy}`}>
         <SelectTrigger>
           <Icon as={ChevronsUpDown} />
           <SelectValue placeholder="Sort by" className="font-semibold text-black" />
@@ -83,20 +83,6 @@ export default function DocumentsControls({
           <ToggleGroupIcon as={Grid3X3} />
         </ToggleGroupItem>
       </ToggleGroup>
-
-      {/* View toggle */}
-      {/* <View className="flex-row rounded-lg bg-gray-100 p-1">
-        <Pressable
-          onPress={() => onViewModeChange('list')}
-          className={`rounded-md p-2 ${viewMode === 'list' ? 'bg-white shadow-sm' : ''}`}>
-          <List size={20} color={viewMode === 'list' ? '#3B82F6' : '#6B7280'} />
-        </Pressable>
-        <Pressable
-          onPress={() => onViewModeChange('grid')}
-          className={`ml-1 rounded-md p-2 ${viewMode === 'grid' ? 'bg-white shadow-sm' : ''}`}>
-          <Grid3X3 size={20} color={viewMode === 'grid' ? '#3B82F6' : '#6B7280'} />
-        </Pressable>
-      </View> */}
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import { DocItems } from '@/types/types';
+import { DocItems } from '@/types';
 import { View } from 'react-native';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Icon } from '../ui/icon';
@@ -53,7 +53,11 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
           <View className="flex gap-2">
             {document.Attachments.map((item, index) => {
               return (
-                <Text key={index + item} className="text-sm text-zinc-600">
+                <Text
+                  key={index + item}
+                  className="text-sm text-zinc-600"
+                  numberOfLines={1}
+                  ellipsizeMode="tail">
                   {item}
                 </Text>
               );

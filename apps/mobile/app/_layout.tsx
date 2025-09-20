@@ -10,11 +10,12 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PortalHost />
       <Stack
         screenOptions={{
           headerShown: false,
-        }}></Stack>
+        }}
+      />
+      <PortalHost />
     </QueryClientProvider>
   );
 }
