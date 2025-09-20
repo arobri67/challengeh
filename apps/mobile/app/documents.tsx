@@ -1,13 +1,10 @@
 import api from '@/api/client';
-import DocList from '@/components/doc-list';
-import DocumentCard from '@/components/documents/document-card-list';
-import DocumentGrid from '@/components/documents/document-card-grid';
 import DocumentsControls from '@/components/documents/documents-controls';
 import DocumentHeader from '@/components/documents/documents-header';
 import { Text } from '@/components/ui/text';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import DocumentCardList from '@/components/documents/document-card-list';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
@@ -28,6 +25,14 @@ export default function DocumentsScreen() {
     queryFn: () => api.getDocs(),
   });
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
   if (!docs) return <Text>No documents found</Text>;
 
   const sortedDocs = [...docs].sort((a, b) => {
@@ -46,8 +51,8 @@ export default function DocumentsScreen() {
   return (
     <>
       <SafeAreaProvider>
-        <SafeAreaView className="bg-white">
-          <View className="bg-white">
+        <SafeAreaView className="flex-1 bg-white">
+          <View className="flex-1 bg-white">
             <DocumentHeader />
             <DocumentsControls
               sortBy={sortBy}
@@ -56,13 +61,14 @@ export default function DocumentsScreen() {
               onViewModeChange={setViewMode}
             />
             <FlatList
+              className="px-4"
               data={sortedDocs}
-              renderItem={}
               renderItem={({ item }) =>
-                viewMode === 'list' ? <DocumentCardList /> : <DocumentCardGrid />
+                viewMode === 'list' ? <DocumentCardList document={item} /> : <DocumentCardGrid />
               }
               numColumns={viewMode === 'grid' ? 2 : 1}
               key={viewMode}
+              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             />
           </View>
         </SafeAreaView>
