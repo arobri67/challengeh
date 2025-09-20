@@ -4,7 +4,6 @@ import { Bell } from 'lucide-react-native';
 
 interface DocumentHeaderProps {
   unreadCount: number;
-  onMarkAsRead: () => void;
 }
 
 export default function DocumentHeader({ unreadCount }: DocumentHeaderProps) {
