@@ -1,4 +1,4 @@
-import api from '@/api/api';
+import api from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { View } from 'react-native';
