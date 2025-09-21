@@ -1,5 +1,6 @@
 import { BASE_URL } from '@/lib/utils';
-import { DocsRes } from '@/types';
+import { CreateDocumentFormData } from '@/schema/document-schema';
+import { DocItems, DocsRes } from '@/types';
 
 const api = {
   async getDocs(): Promise<DocsRes | undefined> {
@@ -7,6 +8,17 @@ const api = {
     const data = await res.json();
 
     return data;
+  },
+  async createDoc(data: CreateDocumentFormData): Promise<DocItems> {
+    const response = await fetch(`${BASE_URL}/new-documents`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to create document');
+    }
+    return await response.json();
   },
 };
 

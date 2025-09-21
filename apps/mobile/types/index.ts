@@ -5,8 +5,8 @@ interface Contributor {
 
 export interface DocItems {
   ID: string;
-  CreatedAt: string; // Represents an ISO 8601 date string
-  UpdatedAt: string; // Represents an ISO 8601 date string
+  CreatedAt: string;
+  UpdatedAt: string;
   Title: string;
   Attachments: string[];
   Contributors: Contributor[];

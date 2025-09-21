@@ -11,6 +11,7 @@ interface DocumentCardProps {
 }
 
 export default function DocumentCardList({ document }: DocumentCardProps) {
+  if (!document) return null;
   return (
     <Card
       className="mb-5 gap-4 rounded-sm"
@@ -34,14 +35,14 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
         <CardDescription className="mb-5 text-xs">
           Last update {formatRelativeDate(document.UpdatedAt)}
         </CardDescription>
-        <View className="flex flex-row gap-10">
+        <View className="flex flex-row gap-8">
           <View>
             <View className="mb-2 flex flex-row items-center gap-2">
               <Icon as={UsersRound} className="color-zinc-800" />
               <Text className="text-sm font-semibold">Contributors</Text>
             </View>
             <View className="flex gap-2">
-              {document.Contributors.map((item) => {
+              {document.Contributors?.map((item) => {
                 return (
                   <Text key={item.ID} className="text-sm text-zinc-600">
                     {item.Name}
@@ -55,13 +56,13 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
               <Icon as={Link} className="color-zinc-800" />
               <Text className="text-sm font-semibold">Attachments</Text>
             </View>
-            <View className="flex gap-2">
-              {document.Attachments.map((item, index) => {
+            <View className="flex flex-col gap-2">
+              {document.Attachments?.map((item, index) => {
                 return (
                   <Text
                     key={index + item}
-                    className="text-sm text-zinc-600"
-                    numberOfLines={1}
+                    className="max-w-[100%] text-sm text-zinc-600"
+                    numberOfLines={2}
                     ellipsizeMode="tail">
                     {item}
                   </Text>
