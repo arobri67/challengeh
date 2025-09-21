@@ -13,14 +13,17 @@ import { WS_URL } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import DrawerModal from '@/components/drawer';
+import semver from 'semver';
 
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
 
 export default function Documents() {
   const { unreadCount } = useWebSocket(WS_URL);
+
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
+  const [refreshing, setRefreshing] = useState(false);
 
   const {
     data: docs,
@@ -31,24 +34,25 @@ export default function Documents() {
     queryFn: () => api.getDocs(),
   });
 
-  const [refreshing, setRefreshing] = useState(false);
-
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
   };
 
-  if (!docs) return <Text>⚠️ No documents found</Text>;
+  if (!docs || !Array.isArray(docs) || docs.length === 0)
+    return <Text>📄 No documents to display</Text>;
 
   const sortedDocs = [...docs].sort((a, b) => {
     switch (sortBy) {
       case 'recent':
         return new Date(b.UpdatedAt).getTime() - new Date(a.UpdatedAt).getTime();
       case 'name':
-        return a.Title.localeCompare(b.Title);
+        return a.Title.toLowerCase().localeCompare(b.Title.toLowerCase());
       case 'version':
-        return b.Version.localeCompare(a.Version);
+        const vA = semver.clean(a.Version) || '0.0.0';
+        const vB = semver.clean(b.Version) || '0.0.0';
+        return semver.compare(vB, vA);
       default:
         return 0;
     }
