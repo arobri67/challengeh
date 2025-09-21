@@ -4,7 +4,7 @@ import DocumentHeader from '@/components/documents/documents-header';
 import { Text } from '@/components/ui/text';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Alert, FlatList, Modal, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import DocumentCardList from '@/components/documents/document-card-list';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
@@ -20,8 +20,7 @@ type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
 
 export default function Documents() {
-  const { unreadCount } = useWebSocket(WS_URL);
-
+  const { unreadCount, notifications, markAsRead } = useWebSocket(WS_URL);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [refreshing, setRefreshing] = useState(false);
@@ -80,7 +79,11 @@ export default function Documents() {
       <SafeAreaProvider>
         <SafeAreaView className="flex-1 bg-white">
           <View className="flex-1 bg-gray-100">
-            <DocumentHeader unreadCount={unreadCount} />
+            <DocumentHeader
+              unreadCount={unreadCount}
+              notifications={notifications}
+              markAsRead={markAsRead}
+            />
             <DocumentsControls
               sortBy={sortBy}
               onSortChange={setSortBy}
