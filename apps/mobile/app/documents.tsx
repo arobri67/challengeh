@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import DrawerModal from '@/components/drawer';
 import semver from 'semver';
+import DocumentAddForm from '@/components/documents/document-add-form';
 
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
@@ -62,7 +63,7 @@ export default function Documents() {
     <>
       <SafeAreaProvider>
         <SafeAreaView className="flex-1 bg-white">
-          <View className="flex-1 bg-slate-50">
+          <View className="flex-1 bg-gray-100">
             <DocumentHeader unreadCount={unreadCount} />
             <DocumentsControls
               sortBy={sortBy}
@@ -88,9 +89,10 @@ export default function Documents() {
               }
             />
           </View>
-
           <View className="border-t-hairline border-slate-400 p-4">
-            <DrawerModal />
+            <DrawerModal>
+              <DocumentAddForm />
+            </DrawerModal>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>

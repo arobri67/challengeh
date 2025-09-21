@@ -1,10 +1,13 @@
 import { Modal, TouchableOpacity, View } from 'react-native';
 import { Text } from './ui/text';
-import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-export default function DrawerModal() {
+interface DrawerModalProps {
+  children: ReactNode;
+}
+
+export default function DrawerModal({ children }: DrawerModalProps) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -15,6 +18,7 @@ export default function DrawerModal() {
         onRequestClose={() => {
           setModalVisible(false);
         }}>
+        {/* blurry part */}
         <View className="flex-1 bg-black/50">
           <TouchableOpacity className="flex-1" onPress={() => setModalVisible(false)} />
           <View className="h-[50%] rounded-t-lg bg-white px-4 pb-8 pt-4">
@@ -27,27 +31,11 @@ export default function DrawerModal() {
                 <Text className="text-gray-500">✕</Text>
               </TouchableOpacity>
             </View>
-
+            {/* title */}
             <Text className="mb-5 font-semibold">Documents informations</Text>
-            <Text className="mb-1 text-sm font-semibold">Name</Text>
-            <Input className="mb-3" placeholder="name" />
-            <Text className="mb-1 text-sm font-semibold">Version</Text>
-            <Input className="mb-3" placeholder="version" />
-            <Text className="mb-1 text-sm font-semibold">File</Text>
-            <View className="flex-row">
-              <Button variant="outline" className="bg-white">
-                <Text className="font-semibold text-blue-500">Choose File</Text>
-              </Button>
-            </View>
-
-            <View className="mt-auto flex-row gap-3">
-              <Button variant="outline" className="flex-1" onPress={() => setModalVisible(false)}>
-                <Text className="font-semibold">Cancel</Text>
-              </Button>
-              <Button className="flex-1 bg-blue-500">
-                <Text className="font-semibold">Submit</Text>
-              </Button>
-            </View>
+            {/* form */}
+            {children}
+            {/* form end */}
           </View>
         </View>
       </Modal>
