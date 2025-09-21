@@ -34,7 +34,7 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
         <CardDescription className="mb-5 text-xs">
           Last update {formatRelativeDate(document.UpdatedAt)}
         </CardDescription>
-        <View className="flex flex-row gap-10">
+        <View className="flex flex-row gap-8">
           <View>
             <View className="mb-2 flex flex-row items-center gap-2">
               <Icon as={UsersRound} className="color-zinc-800" />
