@@ -10,11 +10,11 @@ import DocumentCardList from '@/components/documents/document-card-list';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
 import { useWebSocket } from '@/hooks/use-websocket';
 import { WS_URL } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 import DrawerModal from '@/components/drawer';
 import semver from 'semver';
 import DocumentAddForm from '@/components/documents/document-add-form';
+import { Button } from '@/components/ui/button';
 
 type ViewMode = 'list' | 'grid';
 type SortOption = 'recent' | 'name' | 'version';
@@ -25,13 +25,14 @@ export default function Documents() {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [refreshing, setRefreshing] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const {
-    data: docs,
+    data: documents,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['docs'],
+    queryKey: ['documents'],
     queryFn: () => api.getDocs(),
   });
 
@@ -41,10 +42,12 @@ export default function Documents() {
     setRefreshing(false);
   };
 
-  if (!docs || !Array.isArray(docs) || docs.length === 0)
+  if (isLoading) return <Text>Loading documents...</Text>;
+
+  if (!documents || !Array.isArray(documents) || documents.length === 0)
     return <Text>📄 No documents to display</Text>;
 
-  const sortedDocs = [...docs].sort((a, b) => {
+  const sortedDocs = [...documents].sort((a, b) => {
     switch (sortBy) {
       case 'recent':
         return new Date(b.UpdatedAt).getTime() - new Date(a.UpdatedAt).getTime();
@@ -90,9 +93,15 @@ export default function Documents() {
             />
           </View>
           <View className="border-t-hairline border-slate-400 p-4">
-            <DrawerModal>
-              <DocumentAddForm />
+            <DrawerModal
+              visible={modalVisible}
+              onClose={() => setModalVisible(false)}
+              title="Add document">
+              <DocumentAddForm onSuccess={() => setModalVisible(false)} />
             </DrawerModal>
+            <Button className="bg-blue-500" onPress={() => setModalVisible(true)}>
+              <Text className="font-semibold">+ Add document</Text>
+            </Button>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>

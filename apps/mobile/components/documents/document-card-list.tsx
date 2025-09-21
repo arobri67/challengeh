@@ -11,6 +11,7 @@ interface DocumentCardProps {
 }
 
 export default function DocumentCardList({ document }: DocumentCardProps) {
+  console.log('DocumentCardList received:', document);
   return (
     <Card
       className="mb-5 gap-4 rounded-sm"
