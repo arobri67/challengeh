@@ -21,8 +21,8 @@ interface DocumentsHeaderProps {
 
 const sortOptions = [
   { value: 'recent', label: 'Most recent' },
-  { value: 'name', label: 'By name' },
-  { value: 'version', label: 'By version' },
+  { value: 'name', label: 'By name (A-Z)' },
+  { value: 'version', label: 'By version (desc)' },
 ];
 
 export default function DocumentsControls({
