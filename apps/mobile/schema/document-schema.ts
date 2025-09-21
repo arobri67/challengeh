@@ -10,11 +10,11 @@ export const createDocumentSchema = z
         name: z.string(),
         type: z.string(),
       })
-      .nullable(), // Allow null initially
+      .nullable(),
   })
   .refine((data) => data.file !== null, {
     message: 'File is required',
-    path: ['file'], // Attach error to file field
+    path: ['file'],
   });
 
 export type CreateDocumentFormData = z.infer<typeof createDocumentSchema>;

@@ -45,25 +45,6 @@ export default function DocumentAddForm({ onSuccess }: Props) {
       { shouldValidate: true }
     );
     return;
-    // try {
-    //   const result = await DocumentPicker.getDocumentAsync({
-    //     type: '*/*',
-    //   });
-
-    //   if (!result.canceled) {
-    //     setValue(
-    //       'file',
-    //       {
-    //         uri: 'file://mock-uri',
-    //         name: 'MockFile.pdf',
-    //         type: 'application/pdf',
-    //       },
-    //       { shouldValidate: true }
-    //     );
-    //   }
-    // } catch (error) {
-    //   Alert.alert('Error', 'Failed to pick file');
-    // }
   };
   const onSubmit = async (data: CreateDocumentFormData) => {
     try {

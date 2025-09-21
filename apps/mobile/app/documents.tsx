@@ -42,10 +42,23 @@ export default function Documents() {
     setRefreshing(false);
   };
 
-  if (isLoading) return <Text>Loading documents...</Text>;
+  if (isLoading)
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView className="flex-1 bg-white">
+          <Text className="h-full text-center">Loading documents...</Text>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
 
   if (!documents || !Array.isArray(documents) || documents.length === 0)
-    return <Text>📄 No documents to display</Text>;
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView className="flex-1 bg-white">
+          <Text className="h-full text-center">📄 No documents to display</Text>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
 
   const sortedDocs = [...documents].sort((a, b) => {
     switch (sortBy) {

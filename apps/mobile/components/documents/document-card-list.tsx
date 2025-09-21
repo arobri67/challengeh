@@ -11,7 +11,7 @@ interface DocumentCardProps {
 }
 
 export default function DocumentCardList({ document }: DocumentCardProps) {
-  console.log('DocumentCardList received:', document);
+  if (!document) return null;
   return (
     <Card
       className="mb-5 gap-4 rounded-sm"
@@ -42,7 +42,7 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
               <Text className="text-sm font-semibold">Contributors</Text>
             </View>
             <View className="flex gap-2">
-              {document.Contributors.map((item) => {
+              {document.Contributors?.map((item) => {
                 return (
                   <Text key={item.ID} className="text-sm text-zinc-600">
                     {item.Name}
@@ -57,7 +57,7 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
               <Text className="text-sm font-semibold">Attachments</Text>
             </View>
             <View className="flex flex-col gap-2">
-              {document.Attachments.map((item, index) => {
+              {document.Attachments?.map((item, index) => {
                 return (
                   <Text
                     key={index + item}

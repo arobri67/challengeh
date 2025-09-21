@@ -10,7 +10,7 @@ const api = {
     return data;
   },
   async createDoc(data: CreateDocumentFormData): Promise<DocItems> {
-    const response = await fetch(`${BASE_URL}/documents`, {
+    const response = await fetch(`${BASE_URL}/new-documents`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

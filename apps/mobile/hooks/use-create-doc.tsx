@@ -27,8 +27,9 @@ export const useCreateDocument = () => {
   return useMutation({
     mutationFn: createDocument,
     onSuccess: (newDocument) => {
-      queryClient.setQueryData(['documents'], (old: DocItems[] = []) => [newDocument, ...old]);
-      queryClient.invalidateQueries({ queryKey: ['documents'] });
+      const currentData = (queryClient.getQueryData(['documents']) as DocItems[]) || [];
+      const newData = [newDocument, ...currentData];
+      queryClient.setQueryData(['documents'], newData);
     },
     onError: (error) => {
       console.error('Failed to create document:', error);
