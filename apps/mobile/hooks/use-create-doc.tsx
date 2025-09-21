@@ -1,7 +1,8 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import api from '@/api/client';
 import { CreateDocumentFormData } from '@/schema/document-schema';
 import { DocItems } from '@/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const createDocument = async (data: CreateDocumentFormData): Promise<DocItems> => {
   const newDocument: DocItems = {

@@ -1,12 +1,15 @@
-import { FlatList, View } from 'react-native';
-import { Text } from '../ui/text';
+import { useState } from 'react';
+
 import { Bell } from 'lucide-react-native';
+import { FlatList, View } from 'react-native';
+
+import { formatRelativeDate } from '@/lib/utils';
 import { NotificationMessage } from '@/types';
+
+import DrawerModal from '../drawer';
 import { Button } from '../ui/button';
 import { Icon } from '../ui/icon';
-import DrawerModal from '../drawer';
-import { useState } from 'react';
-import { formatRelativeDate } from '@/lib/utils';
+import { Text } from '../ui/text';
 
 interface DocumentHeaderProps {
   unreadCount: number;
