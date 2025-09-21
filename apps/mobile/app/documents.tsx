@@ -21,7 +21,6 @@ type SortOption = 'recent' | 'name' | 'version';
 
 export default function Documents() {
   const { unreadCount, notifications, markAsRead } = useWebSocket(WS_URL);
-
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [refreshing, setRefreshing] = useState(false);
