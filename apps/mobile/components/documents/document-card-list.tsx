@@ -55,13 +55,13 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
               <Icon as={Link} className="color-zinc-800" />
               <Text className="text-sm font-semibold">Attachments</Text>
             </View>
-            <View className="flex gap-2">
+            <View className="flex flex-col gap-2">
               {document.Attachments.map((item, index) => {
                 return (
                   <Text
                     key={index + item}
-                    className="text-sm text-zinc-600"
-                    numberOfLines={1}
+                    className="max-w-[100%] text-sm text-zinc-600"
+                    numberOfLines={2}
                     ellipsizeMode="tail">
                     {item}
                   </Text>
