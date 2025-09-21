@@ -1,9 +1,10 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import { Platform } from 'react-native';
+import { type ClassValue, clsx } from 'clsx';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { DocItems, SortOption } from '@/types';
+import { Platform } from 'react-native';
 import semver from 'semver';
+import { twMerge } from 'tailwind-merge';
+
+import { DocItems, SortOption } from '@/types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -1,4 +1,7 @@
 import { ChevronsUpDown, Grid3X3, List } from 'lucide-react-native';
+import { View } from 'react-native';
+
+import { Icon } from '../ui/icon';
 import {
   Select,
   SelectContent,
@@ -8,9 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { Icon } from '../ui/icon';
 import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '../ui/toggle-group';
-import { View } from 'react-native';
 
 interface DocumentsHeaderProps {
   sortBy: 'recent' | 'name' | 'version';

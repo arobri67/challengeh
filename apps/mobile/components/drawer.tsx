@@ -1,7 +1,8 @@
-import { Modal, TouchableOpacity, View } from 'react-native';
-import { Text } from './ui/text';
-import { Button } from './ui/button';
 import { ReactNode, useState } from 'react';
+
+import { Modal, TouchableOpacity, View } from 'react-native';
+
+import { Text } from './ui/text';
 
 interface DrawerModalProps {
   visible: boolean;

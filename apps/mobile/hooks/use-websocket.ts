@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { NotificationMessage } from '@/types';
-import { useEffect, useState, useRef } from 'react';
 
 export function useWebSocket(url: string) {
   const [notifications, setNotifications] = useState<NotificationMessage[]>([]);
