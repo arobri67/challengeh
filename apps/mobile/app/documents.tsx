@@ -1,30 +1,26 @@
-import api from '@/api/client';
-import DocumentsControls from '@/components/documents/documents-controls';
-import DocumentHeader from '@/components/documents/documents-header';
-import { Text } from '@/components/ui/text';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
 import { FlatList, RefreshControl, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import DocumentCardList from '@/components/documents/document-card-list';
+
+import api from '@/api/client';
+import AddDocumentModal from '@/components/documents/document-add-modal';
 import DocumentCardGrid from '@/components/documents/document-card-grid';
+import DocumentCardList from '@/components/documents/document-card-list';
+import DocumentsControls from '@/components/documents/documents-controls';
+import DocumentHeader from '@/components/documents/documents-header';
+import EmptyState from '@/components/empty-state';
+import LoadingState from '@/components/loading-state';
 import { useWebSocket } from '@/hooks/use-websocket';
-import { WS_URL } from '@/lib/utils';
-
-import DrawerModal from '@/components/drawer';
-import semver from 'semver';
-import DocumentAddForm from '@/components/documents/document-add-form';
-import { Button } from '@/components/ui/button';
-
-type ViewMode = 'list' | 'grid';
-type SortOption = 'recent' | 'name' | 'version';
+import { WS_URL, sortDocuments } from '@/lib/utils';
+import { DocItems, SortOption, ViewMode } from '@/types';
 
 export default function Documents() {
   const { unreadCount, notifications, markAsRead } = useWebSocket(WS_URL);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [refreshing, setRefreshing] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const {
     data: documents,
@@ -41,38 +37,18 @@ export default function Documents() {
     setRefreshing(false);
   };
 
-  if (isLoading)
-    return (
-      <SafeAreaProvider>
-        <SafeAreaView className="flex-1 bg-white">
-          <Text className="h-full text-center">Loading documents...</Text>
-        </SafeAreaView>
-      </SafeAreaProvider>
-    );
+  if (isLoading) return <LoadingState />;
 
-  if (!documents || !Array.isArray(documents) || documents.length === 0)
-    return (
-      <SafeAreaProvider>
-        <SafeAreaView className="flex-1 bg-white">
-          <Text className="h-full text-center">📄 No documents to display</Text>
-        </SafeAreaView>
-      </SafeAreaProvider>
-    );
+  if (!documents || !Array.isArray(documents) || documents.length === 0) return <EmptyState />;
 
-  const sortedDocs = [...documents].sort((a, b) => {
-    switch (sortBy) {
-      case 'recent':
-        return new Date(b.UpdatedAt).getTime() - new Date(a.UpdatedAt).getTime();
-      case 'name':
-        return a.Title.toLowerCase().localeCompare(b.Title.toLowerCase());
-      case 'version':
-        const vA = semver.clean(a.Version) || '0.0.0';
-        const vB = semver.clean(b.Version) || '0.0.0';
-        return semver.compare(vB, vA);
-      default:
-        return 0;
-    }
-  });
+  const sortedDocs = sortDocuments(documents, sortBy);
+
+  const renderItem = ({ item }: { item: DocItems }) =>
+    viewMode === 'list' ? (
+      <DocumentCardList document={item} />
+    ) : (
+      <DocumentCardGrid document={item} />
+    );
 
   return (
     <>
@@ -93,13 +69,7 @@ export default function Documents() {
             <FlatList
               className="gap-4 px-4"
               data={sortedDocs}
-              renderItem={({ item }) =>
-                viewMode === 'list' ? (
-                  <DocumentCardList document={item} />
-                ) : (
-                  <DocumentCardGrid document={item} />
-                )
-              }
+              renderItem={renderItem}
               numColumns={viewMode === 'grid' ? 2 : 1}
               key={viewMode}
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -108,17 +78,7 @@ export default function Documents() {
               }
             />
           </View>
-          <View className="border-t-hairline border-slate-400 p-4">
-            <DrawerModal
-              visible={modalVisible}
-              onClose={() => setModalVisible(false)}
-              title="Add document">
-              <DocumentAddForm onSuccess={() => setModalVisible(false)} />
-            </DrawerModal>
-            <Button className="bg-blue-500" onPress={() => setModalVisible(true)}>
-              <Text className="font-semibold">+ Add document</Text>
-            </Button>
-          </View>
+          <AddDocumentModal />
         </SafeAreaView>
       </SafeAreaProvider>
     </>

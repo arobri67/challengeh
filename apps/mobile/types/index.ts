@@ -22,3 +22,6 @@ export type NotificationMessage = {
   DocumentID: string;
   DocumentTitle: string;
 };
+
+export type SortOption = 'recent' | 'name' | 'version';
+export type ViewMode = 'list' | 'grid';

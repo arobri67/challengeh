@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/react": "~19.0.14",
     "@types/semver": "^7.7.1",
     "prettier": "^3.6.2",
