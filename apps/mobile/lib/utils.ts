@@ -33,7 +33,10 @@ export const sortDocuments = (docs: DocItems[], sortBy: SortOption): DocItems[] 
       case 'recent':
         return new Date(b.UpdatedAt).getTime() - new Date(a.UpdatedAt).getTime();
       case 'name':
-        return a.Title.toLowerCase().localeCompare(b.Title.toLowerCase());
+        return a.Title.localeCompare(b.Title, undefined, {
+          sensitivity: 'base',
+          numeric: true,
+        });
       case 'version':
         const vA = semver.clean(a.Version) || '0.0.0';
         const vB = semver.clean(b.Version) || '0.0.0';
