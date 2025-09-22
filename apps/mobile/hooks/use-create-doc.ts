@@ -10,14 +10,13 @@ const createDocument = async (data: CreateDocumentFormData): Promise<DocItems> =
     Title: data.name,
     Version: data.version,
     Attachments: data.file ? [data.file.name] : [],
-    Contributors: [{ ID: 'current-user', Name: 'Current User' }],
+    Contributors: [{ ID: 'current-user', Name: 'Arnaud' }],
     CreatedAt: new Date().toISOString(),
     UpdatedAt: new Date().toISOString(),
   };
   try {
     return await api.createDoc(data);
   } catch (error) {
-    console.log('Server creation failed, using optimistic update');
     return newDocument;
   }
 };
