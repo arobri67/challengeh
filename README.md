@@ -1,135 +1,203 @@
-# Turborepo starter
+# Documents Manager - React Native App
 
-This Turborepo starter is maintained by the Turborepo core team.
+A mobile application for managing documents with real-time updates, built as part of a technical challenge using Expo Router and modern React Native development practices.
 
-## Using this example
+## 📱 Features
 
-Run the following command:
+### ✅ Implemented Features
 
-```sh
-npx create-turbo@latest
-```
+#### Required Features
 
-## What's inside?
+- **Document List Display**: View recent documents in both list and grid layouts with toggle controls
+- **Real-time Notifications**: Receive instant notifications when other users create new documents via WebSocket connection with unread count badge
+- **Document Creation**: Add new documents with optimistic updates using React Hook Form and modal interface
 
-This Turborepo includes the following packages/apps:
+#### Optional Features
 
-### Apps and Packages
+- **Pull to Refresh**: Refresh document list by pulling down in both view modes
+- **Relative Date Display**: Shows creation dates in human-readable format using `⁠date-fns` (e.g., "2 days ago")
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+#### 🔄 Pending Features
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- Offline support
+- Local notifications
+- Native share functionality
 
-### Utilities
+## 🏗️ Architecture & Design Decisions
 
-This Turborepo has some additional tools already setup for you:
+    ```
+    apps/
+    ├── mobile/              # React Native app with Expo Router
+    └── server/              # Go backend server
+    ```
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+### Mobile App Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+apps/mobile/
+├── app/                 # Expo Router file-based routing
+├── components/          # Feature-specific and UI components
+├── hooks/               # Custom React hooks with TanStack Query
+├── api/                 # API client and services
+├── schema/              # Zod schemas for form validation
+├── types/               # TypeScript type definitions
+└── __tests__/           # Test files with Jest and Testing Library
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Key Design Decisions
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+- **TanStack Query:** Chosen for robust server state management, caching, and optimistic updates
+- **React Hook Form + Zod:** Type-safe form handling with runtime validation
+- **Expo Router:** File-based routing for better performance and developer experience
+- **NativeWind:** Tailwind CSS for React Native with consistent design system
+- **Custom WebSocket Hook:** Manual WebSocket management for real-time notifications
+- **Optimistic Updates:** Graceful fallback when backend POST endpoint is unavailable
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+## 🛠️ Technology Stack
 
-### Develop
+### Core Technologies
 
-To develop all apps and packages, run the following command:
+**Expo Router**: File-based routing and navigation
+**React Native** 0.79.5: Latest stable version
+**TypeScript** 5.8.3: Full type safety
+**NativeWind** 4.1.23: Tailwind CSS for React Native
 
-```
-cd my-turborepo
+### State Management & Data Fetching
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+**TanStack Query** 5.89.0: Server state management, caching, and synchronization
+**React Hook Form** 7.63.0: Performant form handling
+**Zod** 4.1.11: Runtime type validation and schema definition
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+### UI & Design System
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+**React Native Primitives**: Accessible, unstyled components
+**Lucide React Native**: Consistent icon system
+**Class Variance Authority**: Component variant management
+**Tailwind Merge**: Conditional class merging
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+### Development Tools
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+**Jest + Testing Library:** Comprehensive testing setup
+**Date-fns**: Modern date manipulation library
 
-### Remote Caching
+## 🚀Getting Started
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+**Prerequisites**
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- Node.js (v18 or higher) pnpm (recommended package manager)
+- Expo CLI
+- iOS Simulator or Android Emulator
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+**Installation**
 
-```
-cd my-turborepo
+- Clone the repository
+- Install dependencies
+  `pnpm install`
+- Start Turborepo
+  `pnpm dev`
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+**Development Commands**
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+```# Start development server (with cache clear)
+pnpm dev
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+# Run on specific platforms
+pnpm ios
+pnpm android
+pnpm web
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+# Run tests in watch mode
+pnpm test
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+# Clean build artifacts
+pnpm clean
 ```
 
-## Useful Links
+## 🧪 Testing Strategy
 
-Learn more about the power of Turborepo:
+```
+apps/mobile/__tests__/
+├── api/
+│   └── client.test.ts          # API client functionality
+├── hooks/
+│   ├── use-create-doc.test.ts  # Document creation with optimistic updates
+│   ├── use-documents-query.test.ts # TanStack Query integration
+│   └── use-websockets.test.ts  # WebSocket connection management
+└── setup.test.js               # Jest configuration
+```
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## 🔧 Third-Party Libraries - Rationale & Alternatives
+
+### State Management & Data Fetching
+
+**TanStack Query**
+
+- Why needed: Complex server state management, caching, optimistic updates, and real-time synchronization
+
+**Alternatives considered:**
+
+- Redux Toolkit Query: More boilerplate, overkill for this scope
+- SWR: Less powerful optimistic updates and mutation handling
+- Native fetch + useState: Would require implementing caching, loading states, error handling manually
+
+**Decision:** TanStack Query provides the exact features needed (optimistic updates, automatic caching) with minimal setup
+
+**Zod**
+
+- Why needed: Runtime type validation and schema-first form validation
+
+**Alternatives considered:**
+
+- Yup: Less TypeScript integration, different API
+- Joi: Server-focused, heavier bundle
+
+**Decision:** Perfect TypeScript integration and runtime safety, espacially when TypeSctipt is not present at runtime
+
+### UI System & Styling
+
+**NativeWind + Tailwind CSS**
+
+- Why needed: Rapid UI development with consistent design system
+
+**Alternatives considered:**
+
+- StyleSheet: Verbose, no design system consistency
+- Styled Components: Runtime overhead, larger bundle
+- React Native Elements: Pre-built components but less customizable
+
+**Decision**: Utility-first approach with compile-time optimization
+
+**React Native Reusables (Shadcn/ui port)**
+
+- Why needed: Professional UI components without bundle bloat
+
+**Alternatives considered:**
+
+- React Native Elements: Full library import, unused components
+
+Decision: Copy-paste only needed components, full customization control
+
+### Utilities & Helpers
+
+**Date-fns**
+
+- **Why needed**: Relative date formatting ("2 days ago") and date manipulation
+
+**Alternatives considered:**
+
+- Moment.js: Larger bundle, mutable API
+- Native Date methods: Manual relative formatting implementation
+- Day.js: Smaller but less comprehensive
+
+_Decision:_ Modern, tree-shakeable, immutable API
+
+**Semver**
+
+- **Why needed:** Version comparison and sorting for documents
+
+**Alternatives considered:**
+
+- Manual string comparison: Error-prone for semantic versions
+- Custom implementation: Reinventing the wheel
+
+**Decision:** Standard library for version handling
