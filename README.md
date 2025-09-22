@@ -20,7 +20,6 @@ A mobile application for managing documents with real-time updates, built as par
 
 #### 🔄 Pending Features
 
-- Offline support
 - Local notifications
 - Native share functionality
 
