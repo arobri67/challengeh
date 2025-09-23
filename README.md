@@ -19,11 +19,6 @@ A mobile application for managing documents with real-time updates, built as par
 - **Offline support**: When no network, cache is available (24 hours) to still see documents in UI
 - **Native share functionality**: Native share button in list view
 
-#### 🔄 Pending Features
-
-- Local notifications
-- Native share functionality
-
 ## 🏗️ Architecture & Design Decisions
 
     ```
