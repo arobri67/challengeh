@@ -10,25 +10,13 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Icon } from '../ui/icon';
 import { Text } from '../ui/text';
+import DocumentShareButton from './document-share-button';
 
 interface DocumentCardProps {
   document: DocItems;
 }
 
 export default function DocumentCardList({ document }: DocumentCardProps) {
-  const shareDocument = async (document: DocItems) => {
-    const shareContent = {
-      message: `${document.Title} (v${document.Version})`,
-      title: document.Title,
-    };
-
-    try {
-      await Share.share(shareContent);
-    } catch (error) {
-      console.error('Error sharing document:', error);
-    }
-  };
-
   if (!document) return null;
 
   return (
@@ -90,16 +78,8 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
             </View>
           </View>
         </View>
-        <View className="mt-4 flex-row justify-end">
-          <Button
-            variant="outline"
-            size="sm"
-            onPress={() => shareDocument(document)}
-            className="flex-row items-center gap-2">
-            <ShareIcon size={16} className="text-muted-foreground" />
-            <Text className="text-sm">Share</Text>
-          </Button>
-        </View>
+
+        <DocumentShareButton document={document} />
       </CardContent>
     </Card>
   );
