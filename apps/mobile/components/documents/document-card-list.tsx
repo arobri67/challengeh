@@ -42,8 +42,8 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
         <CardDescription className="mb-5 text-xs">
           Last update {formatRelativeDate(document.UpdatedAt)}
         </CardDescription>
-        <View className="flex flex-row gap-8">
-          <View>
+        <View className="flex flex-row gap-4">
+          <View className="flex-1">
             <View className="mb-2 flex flex-row items-center gap-2">
               <Icon as={UsersRound} className="color-zinc-800" />
               <Text className="text-sm font-semibold">Contributors</Text>
@@ -58,7 +58,7 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
               })}
             </View>
           </View>
-          <View>
+          <View className="flex-1">
             <View className="mb-2 flex flex-row items-center gap-2">
               <Icon as={Link} className="color-zinc-800" />
               <Text className="text-sm font-semibold">Attachments</Text>
@@ -66,11 +66,7 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
             <View className="flex flex-col gap-2">
               {document.Attachments?.map((item, index) => {
                 return (
-                  <Text
-                    key={index + item}
-                    className="max-w-[100%] text-sm text-zinc-600"
-                    numberOfLines={2}
-                    ellipsizeMode="tail">
+                  <Text key={index + item} className="flex-wrap text-sm text-zinc-600">
                     {item}
                   </Text>
                 );
