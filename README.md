@@ -17,6 +17,7 @@ A mobile application for managing documents with real-time updates, built as par
 - **Pull to Refresh**: Refresh document list by pulling down in both view modes
 - **Relative Date Display**: Shows creation dates in human-readable format using `⁠date-fns` (e.g., "2 days ago")
 - **Offline support**: When no network, cache is available (24 hours) to still see documents in UI
+- **Native share functionality**: Native share button in list view
 
 #### 🔄 Pending Features
 
