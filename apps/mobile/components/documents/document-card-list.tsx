@@ -1,12 +1,16 @@
-import { Link, UsersRound } from 'lucide-react-native';
+import { formatDistanceToNow } from 'date-fns';
+import { Link, ShareIcon, UsersRound } from 'lucide-react-native';
+import { Share } from 'react-native';
 import { View } from 'react-native';
 
 import { formatRelativeDate } from '@/lib/utils';
 import { DocItems } from '@/types';
 
+import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Icon } from '../ui/icon';
 import { Text } from '../ui/text';
+import DocumentShareButton from './document-share-button';
 
 interface DocumentCardProps {
   document: DocItems;
@@ -14,6 +18,7 @@ interface DocumentCardProps {
 
 export default function DocumentCardList({ document }: DocumentCardProps) {
   if (!document) return null;
+
   return (
     <Card
       className="mb-5 gap-4 rounded-sm"
@@ -73,6 +78,8 @@ export default function DocumentCardList({ document }: DocumentCardProps) {
             </View>
           </View>
         </View>
+
+        <DocumentShareButton document={document} />
       </CardContent>
     </Card>
   );
