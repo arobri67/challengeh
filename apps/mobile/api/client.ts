@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/lib/utils';
+import { BASE_URL } from '@/lib/constant';
 import { CreateDocumentFormData } from '@/schema/document-schema';
 import { DocItems, DocsRes } from '@/types';
 
