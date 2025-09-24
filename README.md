@@ -94,19 +94,9 @@ apps/mobile/
 
 **Development Commands**
 
-```# Start development server (with cache clear)
+```# Start project (backend server an mobile app)
 pnpm dev
 
-# Run on specific platforms
-pnpm ios
-pnpm android
-pnpm web
-
-# Run tests in watch mode
-pnpm test
-
-# Clean build artifacts
-pnpm clean
 ```
 
 ## 🧪 Testing Strategy
