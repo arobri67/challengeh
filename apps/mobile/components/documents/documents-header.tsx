@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
 import { Bell } from 'lucide-react-native';
-import { FlatList, View } from 'react-native';
+import { View } from 'react-native';
 
-import { formatRelativeDate } from '@/lib/utils';
 import { NotificationMessage } from '@/types';
 
 import DrawerModal from '../drawer';

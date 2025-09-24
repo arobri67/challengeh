@@ -1,12 +1,9 @@
-import { formatDistanceToNow } from 'date-fns';
-import { Link, ShareIcon, UsersRound } from 'lucide-react-native';
-import { Share } from 'react-native';
+import { Link, UsersRound } from 'lucide-react-native';
 import { View } from 'react-native';
 
 import { formatRelativeDate } from '@/lib/utils';
 import { DocItems } from '@/types';
 
-import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Icon } from '../ui/icon';
 import { Text } from '../ui/text';
