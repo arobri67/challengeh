@@ -54,15 +54,15 @@ apps/mobile/
 ### Core Technologies
 
 - **Expo Router**: File-based routing and navigation
-- **React Native** 0.79.5: Latest stable version
-- **TypeScript** 5.8.3: Full type safety
-- **NativeWind** 4.1.23: Tailwind CSS for React Native
+- **React Native**: Latest stable version
+- **TypeScript**: Full type safety
+- **NativeWind**: Tailwind CSS for React Native
 
 ### State Management & Data Fetching
 
-- **TanStack Query** 5.89.0: Server state management, caching, synchronization and offline support
-- **React Hook Form** 7.63.0: Performant form handling
-- **Zod** 4.1.11: Runtime type validation and schema definition
+- **TanStack Query**: Server state management, caching, synchronization and offline support
+- **React Hook Form**: Performant form handling
+- **Zod**: Runtime type validation and schema definition
 
 ### UI & Design System
 
@@ -96,7 +96,6 @@ apps/mobile/
 
 ```# Start project (backend server an mobile app)
 pnpm dev
-
 ```
 
 ## 🧪 Testing Strategy
