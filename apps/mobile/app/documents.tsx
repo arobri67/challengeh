@@ -12,7 +12,8 @@ import EmptyState from '@/components/empty-state';
 import LoadingState from '@/components/loading-state';
 import { useDocumentsQuery } from '@/hooks/use-documents-query';
 import { useWebSocket } from '@/hooks/use-websocket';
-import { WS_URL, sortDocuments } from '@/lib/utils';
+import { WS_URL } from '@/lib/constant';
+import { sortDocuments } from '@/lib/utils';
 import { DocItems, SortOption, ViewMode } from '@/types';
 
 export default function Documents() {
