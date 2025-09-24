@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { Platform } from 'react-native';
 import semver from 'semver';
 import { twMerge } from 'tailwind-merge';
 

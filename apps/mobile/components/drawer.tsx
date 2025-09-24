@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { Modal, TouchableOpacity, View } from 'react-native';
 
