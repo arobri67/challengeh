@@ -10,7 +10,7 @@ A mobile application for managing documents with real-time updates, built as par
 
 - **Document List Display**: View recent documents in both list and grid layouts with toggle controls
 - **Real-time Notifications**: Receive instant notifications when other users create new documents via WebSocket connection with unread count badge
-- **Document Creation**: Add new documents with optimistic updates using React Hook Form and modal interface
+- **Document Creation**: Modal with a form to create new document, optimistic update of the UI to show the new document
 
 #### Optional Features
 
